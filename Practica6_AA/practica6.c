@@ -15,6 +15,8 @@ char B[TAM];
 void principal();
 int leerarchivo(char *a, int ban);
 void imprimir(int ban, int cont);
+int lcs(int i, int j);
+int maxt(int a, int b);
 
 int main(){
 
@@ -27,18 +29,50 @@ int main(){
 
 void principal(){
 
-    int cont = 0;
+    int cont1 = 0, cont2 = 0;
     char archivo[] = "archivo1.txt";
 
-    cont = leerarchivo(archivo, 0);
-    imprimir(0, cont);
-    printf("\n/////////////////////////////////////////////////////////////\n");
+    cont1 = leerarchivo(archivo, 0);
+    printf("\t\t\tCadena 1:\n\n");
+    imprimir(0, cont1);
+    printf("\n\n\n\n\n\n\n\n");
 
     strcpy(archivo, "archivo2.txt");
 
-    cont = leerarchivo(archivo, 1);
-    imprimir(1, cont);
+    cont2 = leerarchivo(archivo, 1);
+    printf("\t\t\tCadena 2:\n\n");
+    imprimir(1, cont2);
 
+    int i = lcs(cont1, cont2);
+
+    printf("\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
+    system("pause");
+    system("cls");
+
+    printf("La LCS es: %d\n",i);
+    int tot = ((i * 100)/(cont1 + cont2))*2;
+
+    printf("Porcentaje Igualdad: %d", tot);
+
+}
+
+int lcs(int i, int j)
+{
+    if (i == 0 || j == 0)
+        return 0;
+    if (A[i - 1] == B[j - 1])
+        return 1 + lcs(i - 1, j - 1);
+    else
+        return maxt(lcs(i, j - 1), lcs(i - 1, j));
+}
+
+int maxt(int a, int b)
+{
+    if (a > b)
+        return a;
+
+    else
+        return b;
 }
 
 void imprimir(int ban, int cont){

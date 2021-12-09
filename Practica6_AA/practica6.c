@@ -36,7 +36,7 @@ mas sencilla de manejar, ademas de que el lenguaje solo permite cadenas de este 
 void principal();
 int leerarchivo(char *a, int ban);
 void imprimir(int ban, int cont);
-int lcs(int i, int j);
+int lcs(char *a, char *b, int i, int j);
 int maxt(int a, int b);
 /*Declaracion de las funciones para la implementacion del algoritmo LCS ademas de la lectura de datos,
 la impresion de lo que guarda cada arreglo y la funcion principal*/
@@ -83,7 +83,9 @@ void principal()
     printf("\t\t\tCadena 2:\n\n");
     imprimir(1, cont2); // Llamada a la funcion imprimir donde le mandamos el arreglo que deseamos imprimir
 
-    int i = lcs(cont1, cont2); /*Llamada a la funcion LCS para obtener el maximo valor de la cadena mas larga de los
+    printf("\n%d, %d\n", cont1, cont2);
+
+    int i = lcs(A, B, cont1, cont2); /*Llamada a la funcion LCS para obtener el maximo valor de la cadena mas larga de los
     archivos en comun, de igual manera esta se almacena en una variable i para saber el maximo valor de esta*/
 
     printf("\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
@@ -102,14 +104,17 @@ void principal()
  *   FUNCION DE LA SUBSECUANCIA COMUN MAS LARGA
  *
  * ****************************************/
-int lcs(int i, int j)
+int lcs(char *a, char *b, int i, int j)
 {
     if (i == 0 || j == 0) // Comparativa encargada de romper la recursividad en caso de que el tamaño de alguna de las cadenas se acabe
         return 0;
-    if (A[i - 1] == B[j - 1])         // Comparativa que se usa para saber si la subcadena en el moemento es parecida, de ser asi esta se manda una vez mas y se le suma uno al total de cncurrencias
-        return 1 + lcs(i - 1, j - 1); // Llamada a la LCS recursivo para continuar en la busqueda de subcadenas
-    else
-        return maxt(lcs(i, j - 1), lcs(i - 1, j)); // Fin del proceso donde se determina la cantidad maxima de subcadenas entre las dos cadenas
+    if (a[i-1] == b[j-1]){         // Comparativa que se usa para saber si la subcadena en el moemento es parecida, de ser asi esta se manda una vez mas y se le suma uno al total de cncurrencias
+
+        return 1 + lcs(a, b, i - 1, j - 1); // Llamada a la LCS recursivo para continuar en la busqueda de subcadenas
+    }
+    else if(a[i-1] != b[j-1])
+        return maxt(lcs(a, b, i, j-2), lcs(a, b, i-2, j)); // Fin del proceso donde se determina la cantidad maxima de subcadenas entre las dos cadenas
+
 }
 /**********************************************/
 

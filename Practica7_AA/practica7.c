@@ -1,4 +1,4 @@
-// Ethan Emiliano Vaquera Aguilera - Andres Vanegas Garcia
+s// Ethan Emiliano Vaquera Aguilera - Andres Vanegas Garcia
 // IPN - Escuela Superior de Computacion
 // Profesor: LUNA BENOSO BENJAMIN
 // Grupo: 3CV11
